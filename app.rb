@@ -32,6 +32,8 @@ get '/notes/:path' do
     erb :tags
   else
     @note = store.find(params['path'].to_i)
+    # hash with [id] = title
+    @titles = store.id_and_title(@note.references)
     erb :note_modal, :layout => false
   end
 end

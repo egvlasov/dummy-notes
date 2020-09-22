@@ -25,7 +25,7 @@
   <div>
     <em>References:</em>
     <% @note.references.each do |id| %>
-      <a href="/notes/<%= id %>" class="text-reset">[<%= id %>]</a>
+      <a href="/notes/<%= id %>" class="text-reset" title="<%= @titles[id] %>">[<%= id %>]</a>
     <% end %>
   </div>
 </div>

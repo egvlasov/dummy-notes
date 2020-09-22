@@ -28,4 +28,13 @@ class NoteStore
       @store.roots.map { |id| @store[id] }
     end
   end
+
+  # method receives array with references and returns hash with [id] = title
+  def id_and_title(references)
+    @store.transaction do
+      titles = Hash.new
+      references.each { |reference| titles[reference] = @store[reference.to_i].title }
+      titles
+    end
+  end
 end

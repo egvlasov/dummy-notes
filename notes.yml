@@ -8,7 +8,6 @@
   content: content of the first note
   references:
   - '20200828004729'
-  - '20200828004753'
 20200828004729: !ruby/object:Note
   id: 20200828004729
   title: second note sdd dofgjodf gdof odfgdfo Charles Perrault was the first of the
@@ -87,24 +86,21 @@
   - summer
   - holiday
   content: Christmas Tree
-  references:
-  - '12345'
+  references: []
 20200907224539: !ruby/object:Note
   id: 20200907224539
   title: Lalala123
   tags:
   - Summer
   content: "summer time\r\nlana"
-  references:
-  - '123456'
+  references: []
 20200907224726: !ruby/object:Note
   id: 20200907224726
   title: Title title
   tags:
   - summer
   content: content
-  references:
-  - '123'
+  references: []
 20200907230608: !ruby/object:Note
   id: 20200907230608
   title: Screening - Positive Flow
