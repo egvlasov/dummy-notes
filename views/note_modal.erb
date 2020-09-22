@@ -1,0 +1,31 @@
+<div class="modal-header d-flex flex-column border-0" data-note-id="<%= @note.id %>">
+  <div class="d-flex w-100">
+    <div class="h4 mr-auto"><%= @note.title %></div>
+    <div>
+      <i type="button" class="material-icons" id="edit-note">edit</i>
+    </div>
+    <div class="px-1">
+      <i type="button" class="material-icons" id="delete-note">delete</i>
+    </div>
+    <div>
+      <i type="button" class="material-icons" data-dismiss="modal">cancel</i>
+    </div>
+  </div>
+  <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
+</div>
+<div class="modal-body">
+  <div class="pb-3" style="line-height: 2;">
+    <% @note.tags.each do |tag| %>
+      <a href="/notes?tags=<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></a>
+    <% end %>
+  </div>
+  <div class="pb-3">
+    <%= @note.content %>
+  </div>
+  <div>
+    <em>References:</em>
+    <% @note.references.each do |id| %>
+      <a href="/notes/<%= id %>" class="text-reset">[<%= id %>]</a>
+    <% end %>
+  </div>
+</div>

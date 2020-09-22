@@ -1,0 +1,44 @@
+<% content_for :title do %>Notes | Edit<% end %>
+<% content_for :body do %>
+  <div class="row">
+    <div class="col-5 mx-auto">
+      <form action="/notes/<%= @note.id %>" method="post">
+        <input type="hidden" name="id" value="<%= @note.id %>">
+        <input type="hidden" name="_method" value="patch">
+        <div class="card bg-warning" style="min-height: 28rem;">
+          <div class="container card-header">
+            <div class="row">
+              <div class="col-10 h3">
+                <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="title" placeholder="title" value="<%= @note.title %>">
+              </div>
+              <div class="col-2">
+                <div class="row">
+                  <div class="col pl-auto pr-0">
+                    <a type="button" class="text-secondary" onclick="this.closest('form').submit()"><i class="material-icons">done</i></a>
+                  </div>
+                  <div class="col px-0">
+                    <a class="text-secondary" href="/notes/<%= @note.id %>">
+                      <i class="material-icons">close</i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <small class="col text-muted">created on <%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y')%></small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-text pb-4">
+              <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="tags" placeholder="tags" value="<%= @note.tags * ' ' %>">
+            </div>
+            <div class="card-text pb-4">
+              <textarea class="form-control form-control-sm bg-dark text-warning border-0" rows="5" name="content" placeholder="content"><%= @note.content %></textarea>
+            </div>
+            <div class="card-text">
+              <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="references" placeholder="references" value="<%= @note.references * ' ' %>">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+<% end %>

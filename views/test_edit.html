@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body class="bg-dark" style="height: 1000px">
+    <nav class="container navbar navbar-expand bg-dark navbar-dark sticky-top">
+      <a class="navbar-brand text-warning" href="/notes">Notes</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <!-- <i class="material-icons">bubble_chart</i> -->
+          <a class="nav-link" href="#">Linked Graph</a>
+        </li>
+        <li class="nav-item">
+          <!-- <i class="material-icons">show_chart</i> -->
+          <a class="nav-link" href="#">Activity Chart</a>
+        </li>
+      </ul>
+      <form class="form-inline" action="/notes" method="get">
+        <input class="form-control form-control-sm mr-2 bg-warning border-0 text-reset" type="text" name="tags" placeholder="tags">
+        <input class="form-control form-control-sm mr-2 bg-warning border-0 text-reset" type="text" name="words" placeholder="words">
+        <button class="btn btn-sm btn-outline-warning" type="submit">Search</button>
+      </form>
+    </nav>
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-9 mx-auto">
+          <div class="row">
+            <div class="col-4 p-2" style="height: 18rem;">
+              <div class="card bg-warning h-100">
+                <a class="text-decoration-none text-dark" data-toggle="modal" data-target="#stats" style="cursor: pointer;">
+                  <div class="card-header h3 text-truncate">Statistics</div>
+                </a>
+                <div class="card-body text-truncate">
+                  <div class="card-text pb-2 text-truncate">Notes number: 5</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="stats">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header h3">Statistics</div>
+                  <div class="modal-body">
+                    check
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 p-2" style="height: 18rem;">
+              <div class="card bg-warning h-100">
+                <div class="card-header h3 text-truncate">
+                  <a class="stretched-link text-decoration-none text-dark" href="/notes/stats">Statistics</a>
+                </div>
+                <div class="card-body text-truncate">
+                  <div class="card-text pb-2 text-truncate">Notes number: 5</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 p-2" style="height: 18rem;">
+              <div class="card bg-warning h-100">
+                <div class="card-header h3 text-truncate">
+                  <a class="stretched-link text-decoration-none text-dark" href="/notes/stats">Statistics</a>
+                </div>
+                <div class="card-body text-truncate">
+                  <div class="card-text pb-2 text-truncate">Notes number: 5</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 p-2" style="height: 18rem;">
+              <div class="card bg-warning h-100">
+                <div class="card-header h3 text-truncate">
+                  <a class="stretched-link text-decoration-none text-dark" href="/notes/stats">Statistics</a>
+                </div>
+                <div class="card-body text-truncate">
+                  <div class="card-text pb-2 text-truncate">Notes number: 5</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                  <div class="card-text text-truncate">Tags number: 10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
