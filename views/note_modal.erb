@@ -14,12 +14,12 @@
   <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
 </div>
 <div class="modal-body">
-  <div class="pb-3" style="line-height: 2;">
+  <div style="line-height: 2;">
     <% @note.tags.each do |tag| %>
-      <a href="/notes?tags=<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></a>
+      <button data-search-tag="<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
     <% end %>
   </div>
-  <div class="pb-3">
+  <div class="py-3">
     <%= @note.content %>
   </div>
   <div>

@@ -22,16 +22,15 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#new-note', function(){
-    var formData = {
-      'title': $('input[name=title]').val(),
-      'tags': $('input[name=tags]').val(),
-      'content': $('textarea[name=content]').val(),
-      'references': $('input[name=references]').val()
-    };
     $.ajax({
       type: 'POST',
       url: '/notes',
-      data: formData,
+      data: {
+        title: $('input[name=title]').val(),
+        tags: $('input[name=tags]').val(),
+        content: $('textarea[name=content]').val(),
+        references: $('input[name=references]').val()
+      },
       success: function(response){
         $('.modal').modal('hide');
         $('.modal').on('hidden.bs.modal', function(){
@@ -67,6 +66,22 @@ $(document).ready(function(){
     $.ajax({
       type: 'DELETE',
       url: '/notes/' + $('.modal-header').attr('data-note-id'),
+      success: function(response){
+        $('.modal').modal('hide');
+        $('.modal').on('hidden.bs.modal', function(){
+          $('.container.py-3').html(response);
+        });
+      }
+    });
+  });
+
+  $(document).on('click', '[data-search-tag]', function(){
+    $.ajax({
+      type: 'GET',
+      url: '/notes',
+      data: {
+        search_tags: $(this).attr('data-search-tag')
+      },
       success: function(response){
         $('.modal').modal('hide');
         $('.modal').on('hidden.bs.modal', function(){
