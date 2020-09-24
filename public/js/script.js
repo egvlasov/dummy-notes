@@ -1,27 +1,30 @@
-$(document).ready(function(){
-  $(document).on('click', '.open-note', function(){
+$(document).ready(function() {
+  // open note from index
+  $(document).on('click', '.open-note', function() {
     $.ajax({
       type: 'GET',
       url: '/notes/' + $(this).attr('id'),
-      success: function(response){
+      success: function(response) {
         $('.modal-content').html(response);
         $('.modal').modal('show');
       }
     });
   });
 
-  $(document).on('click', '#new-modal', function(){
+  // open modal with form for new note
+  $(document).on('click', '#new-modal', function() {
     $.ajax({
       type: 'GET',
       url: '/notes/new',
-      success: function(response){
+      success: function(response) {
         $('.modal-content').html(response);
         $('.modal').modal('show');
       }
     });
   });
 
-  $(document).on('click', '#new-note', function(){
+  // add new note and open it
+  $(document).on('click', '#new-note', function() {
     $.ajax({
       type: 'POST',
       url: '/notes',
@@ -31,61 +34,79 @@ $(document).ready(function(){
         content: $('textarea[name=content]').val(),
         references: $('input[name=references]').val()
       },
-      success: function(response){
-        $('.modal').modal('hide');
-        $('.modal').on('hidden.bs.modal', function(){
-          $.ajax({
-            type: 'GET',
-            url: '/notes',
-            success: function(response2){
+      success: function(response) {
+        $.ajax({
+          type: 'GET',
+          url: '/notes',
+          success: function(response2) {
+            $('.modal').modal('hide');
+            $('.modal').on('hidden.bs.modal', function() {
               $('.container.py-3').html(response2);
               $('.modal-content').html(response);
               $('.modal').modal('show');
-            }
-          });
+            });
+          }
         });
       }
     });
   });
 
-  $(document).on('click', '#edit-note', function(){
-    $('.modal').modal('hide');
-    $('.modal').one('hidden.bs.modal', function(){
-      $.ajax({
-        type: 'GET',
-        url: '/notes/' + $('.modal-header').attr('data-note-id') + '/edit',
-        success: function(response){
+  // open edit modal from current note
+  $(document).on('click', '#edit-note', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/' + $('.modal-header').attr('data-note-id') + '/edit',
+      success: function(response) {
+        $('.modal').modal('hide');
+        $('.modal').one('hidden.bs.modal', function() {
           $('.modal-content').html(response);
           $('.modal').modal('show');
-        }
-      });
+        });
+      }
     });
   });
 
-  $(document).on('click', '#delete-note', function(){
+  // delete current note and update index
+  $(document).on('click', '#delete-note', function() {
     $.ajax({
       type: 'DELETE',
       url: '/notes/' + $('.modal-header').attr('data-note-id'),
-      success: function(response){
+      success: function(response) {
         $('.modal').modal('hide');
-        $('.modal').on('hidden.bs.modal', function(){
+        $('.modal').on('hidden.bs.modal', function() {
           $('.container.py-3').html(response);
         });
       }
     });
   });
 
-  $(document).on('click', '[data-search-tag]', function(){
+  // update index on searching by tag from current note
+  $(document).on('click', '[data-search-tag]', function() {
     $.ajax({
       type: 'GET',
       url: '/notes',
       data: {
         search_tags: $(this).attr('data-search-tag')
       },
-      success: function(response){
+      success: function(response) {
         $('.modal').modal('hide');
-        $('.modal').on('hidden.bs.modal', function(){
+        $('.modal').on('hidden.bs.modal', function() {
           $('.container.py-3').html(response);
+        });
+      }
+    });
+  });
+
+  // open another note from current note
+  $(document).on('click', '[data-ref-id]', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/' + $(this).attr('data-ref-id'),
+      success: function(response) {
+        $('.modal').modal('hide');
+        $('.modal').one('hidden.bs.modal', function() {
+          $('.modal-content').html(response);
+          $('.modal').modal('show');
         });
       }
     });

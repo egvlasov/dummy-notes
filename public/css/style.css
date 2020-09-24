@@ -2,15 +2,19 @@
   background-color: rgba(0, 0, 0, .1);
   /* color: #343a40; */
 }
+
 /* .card-header:hover {
   color: black;
 } */
+
 .modal-header {
   background-color: rgba(0, 0, 0, .1);
 }
+
 i {
   color: darkgray;
 }
+
 i:hover {
   color: gray;
 }
