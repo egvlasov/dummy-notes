@@ -111,4 +111,8 @@ $(document).ready(function() {
       }
     });
   });
+
+  // cofirm editing and open edited note
+
+  // close edit modal and open current note
 });

@@ -34,7 +34,7 @@ get '/notes/:path' do
     @note = store.find(params['path'].to_i)
     # hash with [id] = title
     @titles = store.id_and_title(@note.references)
-    erb :note_modal, :layout => false
+    erb :note, :layout => false
   end
 end
 
