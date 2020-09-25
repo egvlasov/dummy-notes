@@ -113,6 +113,45 @@ $(document).ready(function() {
   });
 
   // cofirm editing and open edited note
+  $(document).on('click', '#confirm-editing', function() {
+    $.ajax({
+      type: 'PATCH',
+      url: '/notes/' + $('.modal-header').attr('data-note-id'),
+      data: {
+        title: $('textarea[name=title]').val(),
+        tags: $('textarea[name=tags]').val(),
+        content: $('textarea[name=content]').val(),
+        references: $('textarea[name=references]').val()
+      },
+      success: function(response) {
+        $.ajax({
+          type: 'GET',
+          url: '/notes',
+          success: function(response2) {
+            $('.modal').modal('hide');
+            $('.modal').on('hidden.bs.modal', function() {
+              $('.container.py-3').html(response2);
+              $('.modal-content').html(response);
+              $('.modal').modal('show');
+            });
+          }
+        });
+      }
+    });
+  });
 
   // close edit modal and open current note
+  $(document).on('click', '#close-editing', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/' + $('.modal-header').attr('data-note-id'),
+      success: function(response) {
+        $('.modal').modal('hide');
+        $('.modal').one('hidden.bs.modal', function() {
+          $('.modal-content').html(response);
+          $('.modal').modal('show');
+        });
+      }
+    });
+  });
 });

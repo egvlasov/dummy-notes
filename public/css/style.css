@@ -18,3 +18,7 @@ i {
 i:hover {
   color: gray;
 }
+
+html {
+  padding-left: calc(100vw - 100%);
+}

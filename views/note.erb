@@ -20,7 +20,7 @@
     <% end %>
   </div>
   <div class="py-4">
-    <%= @note.content %>
+    <%= @note.content.gsub(/\n/, '<br>').gsub(URI.regexp, '<a href="\0" target="_blank">\0</a>') %>
   </div>
   <div>
     <em>References:</em>

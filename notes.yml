@@ -85,14 +85,14 @@
   tags:
   - summer
   - holiday
-  content: Christmas Tree
+  content: Christmas Tree edited
   references: []
 20200907224539: !ruby/object:Note
   id: 20200907224539
   title: Lalala123
   tags:
   - Summer
-  content: "summer time\r\nlana"
+  content: Summer time lana sdfasdf sdfgaetgaergaerg
   references: []
 20200907224726: !ruby/object:Note
   id: 20200907224726
@@ -108,5 +108,9 @@
   - Screen
   - screening
   - admin
-  content: Admin test
-  references: []
+  - edited
+  content: |-
+    Admin test
+    edited https://getbootstrap.com/docs/4.5/utilities/text/
+  references:
+  - '20200907230608'
