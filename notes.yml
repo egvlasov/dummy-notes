@@ -110,7 +110,8 @@
   - admin
   - edited
   content: |-
-    Admin test
+    Admin
+    test
     edited https://getbootstrap.com/docs/4.5/utilities/text/
   references:
   - '20200907230608'

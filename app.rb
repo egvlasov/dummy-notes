@@ -23,7 +23,7 @@ end
 get '/notes/:path' do
   case params['path']
   when 'new'
-    erb :new_note_modal, :layout => false
+    erb :new_note, :layout => false
   when 'stats'
     @stats = StatsGenerator.new(store.all)
     erb :stats
@@ -51,7 +51,7 @@ end
 
 get '/notes/:id/edit' do
   @note = store.find(params['id'].to_i)
-  erb :edit_modal, :layout => false
+  erb :edit, :layout => false
 end
 
 patch '/notes/:id' do

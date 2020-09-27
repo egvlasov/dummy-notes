@@ -1,44 +1,25 @@
-<% content_for :title do %>Notes | Edit<% end %>
-<% content_for :body do %>
-  <div class="row">
-    <div class="col-5 mx-auto">
-      <form action="/notes/<%= @note.id %>" method="post">
-        <input type="hidden" name="id" value="<%= @note.id %>">
-        <input type="hidden" name="_method" value="patch">
-        <div class="card bg-warning" style="min-height: 28rem;">
-          <div class="container card-header">
-            <div class="row">
-              <div class="col-10 h3">
-                <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="title" placeholder="title" value="<%= @note.title %>">
-              </div>
-              <div class="col-2">
-                <div class="row">
-                  <div class="col pl-auto pr-0">
-                    <a type="button" class="text-secondary" onclick="this.closest('form').submit()"><i class="material-icons">done</i></a>
-                  </div>
-                  <div class="col px-0">
-                    <a class="text-secondary" href="/notes/<%= @note.id %>">
-                      <i class="material-icons">close</i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <small class="col text-muted">created on <%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y')%></small>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-text pb-4">
-              <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="tags" placeholder="tags" value="<%= @note.tags * ' ' %>">
-            </div>
-            <div class="card-text pb-4">
-              <textarea class="form-control form-control-sm bg-dark text-warning border-0" rows="5" name="content" placeholder="content"><%= @note.content %></textarea>
-            </div>
-            <div class="card-text">
-              <input class="form-control form-control-sm bg-dark text-warning border-0" type="text" name="references" placeholder="references" value="<%= @note.references * ' ' %>">
-            </div>
-          </div>
-        </div>
-      </form>
+<div class="modal-header d-flex flex-column border-0" data-note-id="<%= @note.id %>">
+  <div class="d-flex w-100">
+    <div class="flex-fill">
+      <textarea class="form-control bg-dark text-light border-0" rows="1" name="title" placeholder="title"><%= @note.title %></textarea>
+    </div>
+    <div class="pl-2 pt-1">
+      <i type="button" class="material-icons-round" id="confirm-editing">check_circle</i>
+    </div>
+    <div class="pl-1 pt-1">
+      <i type="button" class="material-icons-round" id="close-editing">cancel</i>
     </div>
   </div>
-<% end %>
+  <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
+</div>
+<div class="modal-body">
+  <div>
+    <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="2" name="tags" placeholder="tags"><%= @note.tags * ' ' %></textarea>
+  </div>
+  <div class="py-3">
+    <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="5" name="content" placeholder="content"><%= @note.content %></textarea>
+  </div>
+  <div>
+    <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="2" name="references" placeholder="references"><%= @note.references * ' ' %></textarea>
+  </div>
+</div>

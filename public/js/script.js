@@ -29,10 +29,10 @@ $(document).ready(function() {
       type: 'POST',
       url: '/notes',
       data: {
-        title: $('input[name=title]').val(),
-        tags: $('input[name=tags]').val(),
+        title: $('textarea[name=title]').val(),
+        tags: $('textarea[name=tags]').val(),
         content: $('textarea[name=content]').val(),
-        references: $('input[name=references]').val()
+        references: $('textarea[name=references]').val()
       },
       success: function(response) {
         $.ajax({
