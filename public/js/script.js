@@ -154,4 +154,16 @@ $(document).ready(function() {
       }
     });
   });
+
+  // open modal with tags
+  $(document).on('click', '#tags-modal', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/tags',
+      success: function(response) {
+        $('.modal-content').html(response);
+        $('.modal').modal('show');
+      }
+    });
+  });
 });

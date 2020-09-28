@@ -29,7 +29,8 @@ get '/notes/:path' do
     erb :stats
   when 'tags'
     @stats = StatsGenerator.new(store.all)
-    erb :tags
+    @titles = store.id_and_title(store.all.map { |note| note.id })
+    erb :tags, :layout => false
   else
     @note = store.find(params['path'].to_i)
     # hash with [id] = title
