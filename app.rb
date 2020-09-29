@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require 'sinatra/content_for'
 require 'note'
 require 'note_store'
 require 'stats_generator'
