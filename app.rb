@@ -22,6 +22,8 @@ end
 get '/notes/:path' do
   case params['path']
   when 'new'
+    @tags = StatsGenerator.new(store.all).all_tags
+    @titles = store.id_and_title(store.all.map { |note| note.id })
     erb :new_note, :layout => false
   when 'stats'
     @stats = StatsGenerator.new(store.all)
@@ -51,6 +53,8 @@ end
 
 get '/notes/:id/edit' do
   @note = store.find(params['id'].to_i)
+  @tags = StatsGenerator.new(store.all).all_tags
+  @titles = store.id_and_title(store.all.map { |note| note.id })
   erb :edit, :layout => false
 end
 

@@ -22,3 +22,13 @@ i:hover {
 html {
   padding-left: calc(100vw - 100%);
 }
+
+.dropdown-menu {
+  overflow-x: hidden;
+  max-width: 10rem;
+  max-height: 11rem;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}

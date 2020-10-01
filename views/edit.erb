@@ -13,13 +13,36 @@
   <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
 </div>
 <div class="modal-body">
-  <div>
-    <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="2" name="tags" placeholder="tags"><%= @note.tags * ' ' %></textarea>
+  <div class="tags-field d-flex flex-wrap ml-n1 mb-n1">
+    <div class="input-group dropdown ml-1 mb-1" style="width: 8rem;">
+      <input class="form-control form-control-sm bg-dark text-light border-0" name="tags" placeholder="tag" data-toggle="dropdown" autocomplete="off">
+      <ul class="dropdown-menu" id="tagsList">
+        <% @tags.each do |tag| %>
+          <li class="dropdown-item item-tag"><%= tag %></li>
+        <% end %>
+      </ul>
+      <div class="input-group-append">
+        <button class="btn btn-sm btn-secondary border-0 add-tag">Add</button>
+      </div>
+    </div>
+    <% @note.tags.each do |tag| %>
+      <button class="btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-tag"><%= tag %></button>
+    <% end %>
   </div>
   <div class="py-3">
     <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="5" name="content" placeholder="content"><%= @note.content %></textarea>
   </div>
-  <div>
-    <textarea class="form-control form-control-sm bg-dark text-light border-0" rows="2" name="references" placeholder="references"><%= @note.references * ' ' %></textarea>
+  <div class="references-field d-flex flex-wrap ml-n1 mb-n1">
+    <div class="dropdown ml-1 mb-1" style="width: 8rem;">
+      <input class="form-control form-control-sm bg-dark text-light border-0" name="references" placeholder="reference" data-toggle="dropdown" autocomplete="off">
+      <ul class="dropdown-menu" id="referencesList">
+        <% @titles.each do |id, title| %>
+          <li class="dropdown-item item-reference" data-add-ref="<%= id %>"><%= title %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% @note.references.each do |id| %>
+      <button class="btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-reference" data-add-ref="<%= id %>"><%= @titles[id.to_i] %></button>
+    <% end %>
   </div>
 </div>

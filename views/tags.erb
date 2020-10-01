@@ -10,7 +10,7 @@
 <div class="modal-body">
   <% @stats.all_tags.each do |tag| %>
     <div class="pb-1">
-      <button data-search-tag="<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
+      <button data-search-tag="<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %> <span class="badge badge-light"><%= @stats.notes_with_tag(tag).length %></span></button>
       <% @stats.notes_with_tag(tag).each do |id| %>
         <a href="javascript:void(0)" class="text-reset" title="<%= @titles[id] %>" data-ref-id="<%= id %>">[<%= @titles[id].length > 14 ? @titles[id].slice(0, 14) + '...' : @titles[id] %>]</a>
       <% end %>

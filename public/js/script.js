@@ -23,6 +23,44 @@ $(document).ready(function() {
     });
   });
 
+  // show matching tags
+  $(document).on('keyup', "[name='tags']", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tagsList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+  // add chosen tag to input field
+  $(document).on('click', '.item-tag', function() {
+    $("[name='tags']").val($(this).text());
+  });
+
+  // add tag
+  $(document).on('click', 'button.add-tag', function() {
+    $('.tags-field').append("<button class='btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-tag'>" + $("[name='tags']").val() + "</button>");
+    $("[name='tags']").val('');
+  });
+
+  // show matching references
+  $(document).on('keyup', "[name='references']", function() {
+    var value = $(this).val().toLowerCase();
+    $("#referencesList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+  // add reference
+  $(document).on('click', '.item-reference', function() {
+    $('.references-field').append("<button class='btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-reference' data-add-ref='" + $(this).attr('data-add-ref') + "'>" + $(this).text() + "</button>");
+    $("[name='references']").val('');
+  });
+
+  // delete tag or reference
+  $(document).on('click', '.added-tag,.added-reference', function() {
+    $(this).remove();
+  });
+
   // add new note and open it
   $(document).on('click', '#new-note', function() {
     $.ajax({
@@ -30,9 +68,9 @@ $(document).ready(function() {
       url: '/notes',
       data: {
         title: $('textarea[name=title]').val(),
-        tags: $('textarea[name=tags]').val(),
+        tags: $('button.added-tag').map(function() { return $(this).text(); }).get().join(' '),
         content: $('textarea[name=content]').val(),
-        references: $('textarea[name=references]').val()
+        references: $('button.added-reference').map(function() { return $(this).attr('data-add-ref'); }).get().join(' ')
       },
       success: function(response) {
         $.ajax({
@@ -119,9 +157,9 @@ $(document).ready(function() {
       url: '/notes/' + $('.modal-header').attr('data-note-id'),
       data: {
         title: $('textarea[name=title]').val(),
-        tags: $('textarea[name=tags]').val(),
+        tags: $('button.added-tag').map(function() { return $(this).text(); }).get().join(' '),
         content: $('textarea[name=content]').val(),
-        references: $('textarea[name=references]').val()
+        references: $('button.added-reference').map(function() { return $(this).attr('data-add-ref'); }).get().join(' ')
       },
       success: function(response) {
         $.ajax({
