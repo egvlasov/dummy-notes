@@ -15,7 +15,6 @@ get '/notes' do
     searcher = Searcher.new(store.all, edited_params)
     @notes = searcher.filtered_notes
   end
-  # @stats = StatsGenerator.new(store.all)
   erb :index, :layout => !request.xhr?
 end
 
@@ -25,16 +24,12 @@ get '/notes/:path' do
     @tags = StatsGenerator.new(store.all).all_tags
     @titles = store.id_and_title(store.all.map { |note| note.id })
     erb :new_note, :layout => false
-  when 'stats'
-    @stats = StatsGenerator.new(store.all)
-    erb :stats
   when 'tags'
     @stats = StatsGenerator.new(store.all)
     @titles = store.id_and_title(store.all.map { |note| note.id })
     erb :tags, :layout => false
   else
     @note = store.find(params['path'].to_i)
-    # hash with [id] = title
     @titles = store.id_and_title(@note.references)
     erb :note, :layout => false
   end
@@ -46,9 +41,8 @@ post '/notes' do
   @note.tags = params['tags'].split
   @note.content = params['content']
   @note.references = params['references'].split
-  store.save(@note)
+  store.save(@note, [], @note.references)
   redirect "/notes/#{@note.id}"
-  # erb :note_modal, :layout => false
 end
 
 get '/notes/:id/edit' do
@@ -63,13 +57,13 @@ patch '/notes/:id' do
   @note.title = params['title']
   @note.tags = params['tags'].split
   @note.content = params['content']
+  old_references = @note.references
   @note.references = params['references'].split
-  store.save(@note)
+  store.save(@note, old_references, @note.references)
   redirect "/notes/#{params['id']}"
 end
 
 delete '/notes/:id' do
   store.delete(params['id'].to_i)
   redirect '/notes'
-  # erb :index, :layout => false
 end

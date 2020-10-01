@@ -6,8 +6,7 @@
   - first_tag
   - second_tag
   content: content of the first note
-  references:
-  - '20200828004729'
+  references: []
 20200828004729: !ruby/object:Note
   id: 20200828004729
   title: second note sdd dofgjodf gdof odfgdfo Charles Perrault was the first of the
@@ -34,17 +33,14 @@
   - first_tag
   - one_more_tag
   content: 'editted Content of the second note '
-  references:
-  - '20200828005516'
+  references: []
 20200828005516: !ruby/object:Note
   id: 20200828005516
   title: test
   tags:
   - test
   content: test
-  references:
-  - '20200828004652'
-  - '20200828004729'
+  references: []
 20200831152645: !ruby/object:Note
   id: 20200831152645
   title: '1'
@@ -53,32 +49,23 @@
   - Test
   - deliver_to_prod
   content: a lot of changes
-  references:
-  - '20200828004729'
+  references: []
 20200905165431: !ruby/object:Note
   id: 20200905165431
   title: Тестовая заметка для очень длинного текста
   tags:
   - test
   - огонь
-  - deliver_to_prod_tetstetstetsetsetstes
   - много
   - всяких
   - разных
   - тегов
-  - тегов2
-  - тегов3
-  - тегов4
-  - тегов5
-  - тегов6
   - summer
+  - "#tag"
+  - "#тег"
   content: Чек страницы создания заметки c очень длинным текстом в содержании заметки
   references:
-  - '20200828005516'
-  - '20200828005516'
-  - '20200828005516'
-  - '20200828005516'
-  - '20200828005516'
+  - '20200907230608'
 20200907224052: !ruby/object:Note
   id: 20200907224052
   title: Note Nat
@@ -114,4 +101,4 @@
     test
     edited https://getbootstrap.com/docs/4.5/utilities/text/
   references:
-  - '20200907230608'
+  - '20200905165431'

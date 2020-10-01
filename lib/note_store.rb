@@ -11,14 +11,16 @@ class NoteStore
     end
   end
 
-  def save(note)
+  def save(note, old_references, new_references)
     @store.transaction do
       @store[note.id] = note
+      sync_references(note.id, old_references, new_references)
     end
   end
 
   def delete(id)
     @store.transaction do
+      sync_references(id, @store[id].references, [])
       @store.delete(id)
     end
   end
@@ -35,6 +37,21 @@ class NoteStore
       titles = Hash.new
       references.each { |reference| titles[reference] = @store[reference.to_i].title }
       titles
+    end
+  end
+
+  def sync_references(id, old_references, new_references)
+    add_references = new_references - old_references
+    delete_references = old_references - new_references
+    if !(add_references).empty?
+      add_references.each do |reference|
+        @store[reference.to_i].references << id.to_s
+      end
+    end
+    if !(delete_references).empty?
+      delete_references.each do |reference|
+        @store[reference.to_i].references.delete(id.to_s)
+      end
     end
   end
 end

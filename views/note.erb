@@ -16,7 +16,7 @@
 <div class="modal-body">
   <div style="line-height: 2;">
     <% @note.tags.each do |tag| %>
-      <button data-search-tag="<%= ERB::Util.url_encode(tag) %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
+      <button data-search-tag="<%= tag %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
     <% end %>
   </div>
   <div class="py-4">
