@@ -31,9 +31,9 @@ $(document).ready(function() {
     });
   });
 
-  // add chosen tag to input field
+  // add chosen tag
   $(document).on('click', '.item-tag', function() {
-    $("[name='tags']").val($(this).text());
+    $('.tags-field').append("<button class='btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-tag'>" + $(this).text() + "</button>");
   });
 
   // add tag
@@ -50,7 +50,7 @@ $(document).ready(function() {
     });
   });
 
-  // add reference
+  // add chosen reference
   $(document).on('click', '.item-reference', function() {
     $('.references-field').append("<button class='btn btn-sm btn-dark text-light border-0 ml-1 mb-1 added-reference' data-add-ref='" + $(this).attr('data-add-ref') + "'>" + $(this).text() + "</button>");
     $("[name='references']").val('');
