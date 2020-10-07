@@ -17,7 +17,6 @@ class StatsGenerator
     all_tags.length
   end
 
-  # use this way of double block or set ".each" and ".downcase!" in all_tags method
   def notes_with_tag(tag)
     tag_exists = @all_notes.select do |note|
       note.tags.map { |tag| tag.downcase }.include?(tag)

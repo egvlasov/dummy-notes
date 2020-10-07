@@ -5,7 +5,7 @@ $(document).ready(function() {
       type: 'GET',
       url: '/notes/' + $(this).attr('id'),
       success: function(response) {
-        $('.modal-content').html(response);
+        $('.modal').html(response);
         $('.modal').modal('show');
       }
     });
@@ -17,7 +17,7 @@ $(document).ready(function() {
       type: 'GET',
       url: '/notes/new',
       success: function(response) {
-        $('.modal-content').html(response);
+        $('.modal').html(response);
         $('.modal').modal('show');
       }
     });
@@ -80,7 +80,7 @@ $(document).ready(function() {
             $('.modal').modal('hide');
             $('.modal').on('hidden.bs.modal', function() {
               $('.container.py-3').html(response2);
-              $('.modal-content').html(response);
+              $('.modal').html(response);
               $('.modal').modal('show');
             });
           }
@@ -97,7 +97,7 @@ $(document).ready(function() {
       success: function(response) {
         $('.modal').modal('hide');
         $('.modal').one('hidden.bs.modal', function() {
-          $('.modal-content').html(response);
+          $('.modal').html(response);
           $('.modal').modal('show');
         });
       }
@@ -143,7 +143,7 @@ $(document).ready(function() {
       success: function(response) {
         $('.modal').modal('hide');
         $('.modal').one('hidden.bs.modal', function() {
-          $('.modal-content').html(response);
+          $('.modal').html(response);
           $('.modal').modal('show');
         });
       }
@@ -169,7 +169,7 @@ $(document).ready(function() {
             $('.modal').modal('hide');
             $('.modal').on('hidden.bs.modal', function() {
               $('.container.py-3').html(response2);
-              $('.modal-content').html(response);
+              $('.modal').html(response);
               $('.modal').modal('show');
             });
           }
@@ -186,7 +186,7 @@ $(document).ready(function() {
       success: function(response) {
         $('.modal').modal('hide');
         $('.modal').one('hidden.bs.modal', function() {
-          $('.modal-content').html(response);
+          $('.modal').html(response);
           $('.modal').modal('show');
         });
       }
@@ -199,7 +199,31 @@ $(document).ready(function() {
       type: 'GET',
       url: '/notes/tags',
       success: function(response) {
-        $('.modal-content').html(response);
+        $('.modal').html(response);
+        $('.modal').modal('show');
+      }
+    });
+  });
+
+  // open modal with graph
+  $(document).on('click', '#graph-modal', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/graph',
+      success: function(response) {
+        $('.modal').html(response);
+        $('.modal').modal('show');
+      }
+    });
+  });
+
+  // open modal with chart
+  $(document).on('click', '#chart-modal', function() {
+    $.ajax({
+      type: 'GET',
+      url: '/notes/chart',
+      success: function(response) {
+        $('.modal').html(response);
         $('.modal').modal('show');
       }
     });

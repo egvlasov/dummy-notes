@@ -1,31 +1,35 @@
-<div class="modal-header d-flex flex-column border-0" data-note-id="<%= @note.id %>">
-  <div class="d-flex w-100">
-    <div class="flex-fill h4"><%= @note.title %></div>
-    <div class="pl-2 pt-1">
-      <i type="button" class="material-icons-round" id="edit-note">edit</i>
+<div class="modal-dialog modal-dialog-centered" style="width: 28rem;">
+  <div class="modal-content bg-light border-0" style="min-height: 28rem;">
+    <div class="modal-header d-flex flex-column border-0" data-note-id="<%= @note.id %>">
+      <div class="d-flex w-100">
+        <div class="flex-fill h4"><%= @note.title %></div>
+        <div class="pl-2 pt-1">
+          <i type="button" class="material-icons-round" id="edit-note">edit</i>
+        </div>
+        <div class="px-1 pt-1">
+          <i type="button" class="material-icons-round" id="delete-note">delete</i>
+        </div>
+        <div class="pt-1">
+          <i type="button" class="material-icons-round" data-dismiss="modal">cancel</i>
+        </div>
+      </div>
+      <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
     </div>
-    <div class="px-1 pt-1">
-      <i type="button" class="material-icons-round" id="delete-note">delete</i>
+    <div class="modal-body">
+      <div style="line-height: 2;">
+        <% @note.tags.each do |tag| %>
+          <button data-search-tag="<%= tag %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
+        <% end %>
+      </div>
+      <div class="py-4">
+        <%= @note.content.gsub(/\n/, '<br>').gsub(URI.regexp, '<a href="\0" target="_blank">\0</a>') %>
+      </div>
+      <div>
+        <em>References:</em>
+        <% @note.references.each do |id| %>
+          <a href="javascript:void(0)" class="text-reset" title="<%= @titles[id] %>" data-ref-id="<%= id %>">[<%= @titles[id].length > 14 ? @titles[id].slice(0, 14) + '...' : @titles[id] %>]</a>
+        <% end %>
+      </div>
     </div>
-    <div class="pt-1">
-      <i type="button" class="material-icons-round" data-dismiss="modal">cancel</i>
-    </div>
-  </div>
-  <small class="text-muted"><%= Time.parse(@note.id.to_s).strftime('%B %-d, %Y') %></small>
-</div>
-<div class="modal-body">
-  <div style="line-height: 2;">
-    <% @note.tags.each do |tag| %>
-      <button data-search-tag="<%= tag %>" class="btn btn-sm btn-dark text-light border-0"><%= tag %></button>
-    <% end %>
-  </div>
-  <div class="py-4">
-    <%= @note.content.gsub(/\n/, '<br>').gsub(URI.regexp, '<a href="\0" target="_blank">\0</a>') %>
-  </div>
-  <div>
-    <em>References:</em>
-    <% @note.references.each do |id| %>
-      <a href="javascript:void(0)" class="text-reset" title="<%= @titles[id] %>" data-ref-id="<%= id %>">[<%= @titles[id].length > 14 ? @titles[id].slice(0, 14) + '...' : @titles[id] %>]</a>
-    <% end %>
   </div>
 </div>

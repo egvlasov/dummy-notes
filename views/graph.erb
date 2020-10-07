@@ -1,0 +1,81 @@
+<div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-content bg-light border-0" style="min-height: 50rem;">
+    <div class="modal-header d-flex flex-column border-0">
+      <div class="d-flex w-100">
+        <div class="flex-fill h4">Notes Graph</div>
+        <div class="pl-2 pt-1">
+          <i type="button" class="material-icons-round" data-dismiss="modal">cancel</i>
+        </div>
+      </div>
+      <small class="text-muted">Legend:</small>
+    </div>
+    <div class="modal-body" id="notes-graph" style="height: 1rem;"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  var nodes = new vis.DataSet([
+    <% @notes.each do |note| %>
+      { id: <%= note.id %>, group: "notes", label: "[<%= note.title.length > 14 ? note.title.slice(0, 14) + '...' : note.title %>]", title: "<%= note.title %>" },
+    <% end %>
+    <% @stats.all_tags.each do |tag| %>
+      { id: "<%= tag %>", value: <%= @stats.notes_with_tag(tag).length %>, group: "tags", label: "<%= tag %>", title: "<%= tag %>" },
+    <% end %>
+  ]);
+
+  var edges = new vis.DataSet([
+    <% @graph_data.each do |pair| %>
+      { from: <%= pair.first %>, to: <%= pair.last %> },
+    <% end %>
+    <% @stats.all_tags.each do |tag| %>
+      <% @stats.notes_with_tag(tag).each do |id| %>
+        { from: "<%= tag %>", to: <%= id %> },
+      <% end %>
+    <% end %>
+  ]);
+
+  var container = document.getElementById("notes-graph");
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    groups: {
+      notes: {
+
+      },
+      tags: {
+        color: "#808080",
+        scaling: {
+          customScalingFunction: function (min, max, total, value) {
+            return value / total;
+          },
+          min: 15,
+          max: 50
+        }
+      }
+    },
+    nodes: {
+      shape: "dot",
+      size: 15,
+      scaling: {
+        label: {
+          min: 15,
+          max: 50
+        }
+      }
+    },
+    physics: {
+      forceAtlas2Based: {
+        gravitationalConstant: -26,
+        centralGravity: 0.005,
+        springLength: 230,
+        springConstant: 0.18,
+      },
+      maxVelocity: 146,
+      solver: "forceAtlas2Based",
+      timestep: 0.35,
+      stabilization: { iterations: 150 }
+    }
+  };
+  var network = new vis.Network(container, data, options);
+</script>

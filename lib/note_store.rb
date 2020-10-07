@@ -54,4 +54,22 @@ class NoteStore
       end
     end
   end
+
+  def pairs_of_references
+    pairs = []
+    self.all.each do |note|
+      note.references.each do |reference|
+        pairs << [note.id, reference.to_i]
+      end
+    end
+    pairs.each { |pair| pairs[pairs.index(pair)] = nil if pairs.include?([pair.last, pair.first]) }
+  end
+
+  def notes_per_day
+    npd = Hash.new(0)
+    self.all.each do |note|
+      npd[note.id.to_s.slice(0, 8)] += 1
+    end
+    npd
+  end
 end

@@ -6,6 +6,7 @@ require 'stats_generator'
 require 'searcher'
 
 store = NoteStore.new('notes.yml')
+stats = StatsGenerator.new(store.all)
 
 get '/notes' do
   edited_params = params.slice(:search_tags, :search_words)
@@ -21,13 +22,21 @@ end
 get '/notes/:path' do
   case params['path']
   when 'new'
-    @tags = StatsGenerator.new(store.all).all_tags
+    @tags = stats.all_tags
     @titles = store.id_and_title(store.all.map { |note| note.id })
     erb :new_note, :layout => false
   when 'tags'
-    @stats = StatsGenerator.new(store.all)
+    @stats = stats
     @titles = store.id_and_title(store.all.map { |note| note.id })
     erb :tags, :layout => false
+  when 'graph'
+    @notes = store.all
+    @stats = stats
+    @graph_data = store.pairs_of_references.compact
+    erb :graph, :layout => false
+  when 'chart'
+    @chart_data = store.notes_per_day
+    erb :chart, :layout => false
   else
     @note = store.find(params['path'].to_i)
     @titles = store.id_and_title(@note.references)
@@ -47,7 +56,7 @@ end
 
 get '/notes/:id/edit' do
   @note = store.find(params['id'].to_i)
-  @tags = StatsGenerator.new(store.all).all_tags
+  @tags = stats.all_tags
   @titles = store.id_and_title(store.all.map { |note| note.id })
   erb :edit, :layout => false
 end

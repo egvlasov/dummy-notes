@@ -11,25 +11,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/js/script.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/moment@latest"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-data@latest/peer/umd/vis-data.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/peer/umd/vis-timeline-graph2d.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-timeline/styles/vis-timeline-graph2d.min.css" >
+    <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css">
   </head>
   <body class="bg-dark">
     <nav class="container navbar navbar-expand bg-dark navbar-dark sticky-top">
       <a class="navbar-brand text-light" href="/notes">Notes</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <!-- <i class="material-icons">bubble_chart</i> -->
-          <a class="nav-link" href="#">Linked Graph</a>
+          <a class="nav-link" href="javascript:void(0)" id="graph-modal"><i class="material-icons-round">bubble_chart</i></a>
         </li>
         <li class="nav-item">
-          <!-- <i class="material-icons">show_chart</i> -->
-          <a class="nav-link" href="#">Activity Chart</a>
+          <a class="nav-link" href="javascript:void(0)" id="chart-modal"><i class="material-icons-round">show_chart</i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)" id="tags-modal">Tags</a>
+          <a class="nav-link" href="javascript:void(0)" id="tags-modal"><i class="material-icons-round">text_fields</i></a>
         </li>
         <li class="nav-item">
           <%# <div type="button" class="nav-link" id="new-modal">Add Note</div> %>
-          <a class="nav-link" href="javascript:void(0)" id="new-modal">Add Note</a>
+          <a class="nav-link" href="javascript:void(0)" id="new-modal"><i class="material-icons-round">post_add</i></a>
         </li>
       </ul>
       <form class="form-inline" action="/notes" method="get">

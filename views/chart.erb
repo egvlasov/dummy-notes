@@ -1,0 +1,47 @@
+<div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-content bg-light border-0" style="min-height: 50rem;">
+    <div class="modal-header d-flex flex-column border-0">
+      <div class="d-flex w-100">
+        <div class="flex-fill h4">Activity Chart</div>
+        <div class="pl-2 pt-1">
+          <i type="button" class="material-icons-round" data-dismiss="modal">cancel</i>
+        </div>
+      </div>
+      <small class="text-muted">Legend:</small>
+    </div>
+    <div class="modal-body" id="activity-chart" style="height: 1rem;"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  var items = new vis.DataSet([
+    <% @chart_data.each do |date, number_of_notes| %>
+      { x: "<%= Time.parse(date).strftime('%Y-%m-%d') %>", y: <%= number_of_notes %> },
+    <% end %>
+  ]);
+
+  var container = document.getElementById("activity-chart");
+  var options = {
+    start: '2020-08-01',
+    end: '2020-10-31',
+    min: '2020-08-01',
+    height: '100%',
+    drawPoints: {
+      size: 10,
+      style: 'circle'
+    },
+    dataAxis: {
+      left: {
+        format: function (value) {
+          return '' + value;
+        },
+        title: {
+          text: "Number of notes"
+        }
+      }
+    },
+    showCurrentTime: false,
+    zoomMax: 31536000000,
+    zoomMin: 864000000
+  };
+  var chart = new vis.Graph2d(container, items, options);
+</script>
